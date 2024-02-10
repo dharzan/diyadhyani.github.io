@@ -159,7 +159,8 @@ export function DropdownMenu() {
 
   // Enhanced dropdown menu styling
   const menuStyle = {
-
+    display: 'flex',
+    flexDirection: 'column',
     position: 'absolute',
     top: '100%',
     right: 0,
@@ -172,7 +173,9 @@ export function DropdownMenu() {
 
   // Styling for each dropdown item
   const itemStyle = {
-    display: 'block',
+
+    display: 'flex',
+    justifyContent: 'space-around',
     padding: '10px 20px',
     textDecoration: 'none',
     color: 'white',
@@ -188,23 +191,23 @@ export function DropdownMenu() {
         <div style={menuStyle}>
           <a href="/" style={itemStyle}>
             <FontAwesomeIcon icon={faHome}  />
-            <span style={{ marginLeft: '1px' }}></span>
+            <span style={{ marginLeft: '0px' }}></span>
           </a>
           <a href="#/AboutMe" style={itemStyle}>
             <FontAwesomeIcon icon={faUser}  />
-            <span style={{ marginLeft: '1px' }}></span>
+            <span style={{ marginLeft: '0px' }}></span>
           </a>
           <a href="#/Timeline" style={itemStyle}>
             <FontAwesomeIcon icon={faClock} />
-            <span style={{ marginLeft: '1px' }}></span>
+            <span style={{ marginLeft: '0px' }}></span>
           </a>
           <a href="#/Projects" style={itemStyle}>
             <FontAwesomeIcon icon={faProjectDiagram} />
-            <span style={{ marginLeft: '1px' }}></span>
+            <span style={{ marginLeft: '0px' }}></span>
           </a>
           <a href="#/Contact-Me" style={itemStyle}>
             <FontAwesomeIcon icon={faEnvelope} />
-            <span style={{ marginLeft: '1px' }}></span>
+            <span style={{ marginLeft: '0px' }}></span>
           </a>
         </div>
       )}
