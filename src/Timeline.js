@@ -1,9 +1,14 @@
 import React from 'react';
 import {DropdownMenu} from './App'
 
-function Timeline() {
+function Timeline() 
+{
+  
+  return (
+  <div className='App' >
   <DropdownMenu/>
-  return <div>Timeline content goes here.</div>;
+    <h1>Timeline</h1></div>
+  )
 }
 
 export default Timeline;

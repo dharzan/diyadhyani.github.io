@@ -9,6 +9,12 @@ import diya2 from "./diya2.jpeg";
 import diya3 from "./Diya3.png";
 import useScrollPosition from "./useScrollPosition";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUser, faClock, faProjectDiagram, faEnvelope, faBars, faDragon, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { useMemo } from "react";
+import { Vector3 } from "three";
+import { useThree } from "@react-three/fiber";
+
 
 
 export function Cube({ spin, turnSpinOn }) {
@@ -61,6 +67,12 @@ export function Home({spin}) {
     setIsDarkMode(!isDarkMode);
   };
 
+  
+  const stars = useMemo(() => {
+    return new Array(600).fill().map((_, i) => <Star key={i} />);
+  }, []);
+
+
   // Define the button style to match the dropdown button style
   const buttonStyle = {
     padding: "10px 20px",
@@ -80,7 +92,7 @@ export function Home({spin}) {
         <div style={{ textAlign: "end" }}>
           {/* Apply the buttonStyle to the toggle button */}
           <button onClick={toggleDarkMode} style={buttonStyle}>
-            {isDarkMode ? "Light Mode" : "Dark Mode"}
+          <FontAwesomeIcon icon={faMoon}/> 
           </button>
         </div>
       </div>
@@ -97,6 +109,7 @@ export function Home({spin}) {
             background: isDarkMode ? "black" : "transparent",
           }}
         >
+          {stars}
           <perspectiveCamera position={[0, 0, 5]} />
           <ambientLight intensity={0.5} />
           <pointLight position={[3, 4, 2]} />
@@ -104,6 +117,20 @@ export function Home({spin}) {
         </Canvas>
       </div>
     </div>
+  );
+}
+
+function Star() {
+  const position = useMemo(() => {
+    // Generate a random position for each star
+    return [Math.random() * 600 - 300, Math.random() * 600 - 300, Math.random() * 600 - 300];
+  }, []);
+
+  return (
+    <mesh position={position}>
+      <sphereGeometry args={[0.5, 32, 32]} />
+      <meshBasicMaterial color="#ffffff" />
+    </mesh>
   );
 }
 
@@ -118,7 +145,7 @@ export function DropdownMenu() {
 
   // Styling for the dropdown button that aligns with your UI theme
   const buttonStyle = {
-    padding: "10px 40px",
+    padding: "10px 20px",
     fontSize: "16px",
     cursor: "pointer",
     border: "none",
@@ -132,6 +159,7 @@ export function DropdownMenu() {
 
   // Enhanced dropdown menu styling
   const menuStyle = {
+
     position: 'absolute',
     top: '100%',
     right: 0,
@@ -147,24 +175,37 @@ export function DropdownMenu() {
     display: 'block',
     padding: '10px 20px',
     textDecoration: 'none',
-    color: '#333',
-    backgroundColor: 'white', // Default background
+    color: 'white',
+    backgroundColor: '#333', // Default background
     transition: 'background-color 0.3s, color 0.3s', // Smooth transition for hover
   };
-
   return (
     <div style={{ position: 'absolute', top: 20, right: 20 }}>
       <button onClick={toggleDropdown} style={buttonStyle}>
-        Menu
+        <FontAwesomeIcon icon={faBars} /> {/* Assuming faBars is imported for the menu icon */}
       </button>
       {isOpen && (
         <div style={menuStyle}>
-        <a href="/" style={itemStyle} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f2f2f2'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}>Home</a>
-
-          <Link href="/AboutMe" style={itemStyle} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f2f2f2'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}>About Me</Link>
-          <a href="/Timeline" style={itemStyle} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f2f2f2'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}>Timeline</a>
-          <a href="/Projects" style={itemStyle} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f2f2f2'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}>Projects</a>
-          <a href="/Contact-Me" style={itemStyle} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f2f2f2'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}>Contact Me</a>
+          <a href="/" style={itemStyle}>
+            <FontAwesomeIcon icon={faHome}  />
+            <span style={{ marginLeft: '1px' }}></span>
+          </a>
+          <a href="#/AboutMe" style={itemStyle}>
+            <FontAwesomeIcon icon={faUser}  />
+            <span style={{ marginLeft: '1px' }}></span>
+          </a>
+          <a href="#/Timeline" style={itemStyle}>
+            <FontAwesomeIcon icon={faClock} />
+            <span style={{ marginLeft: '1px' }}></span>
+          </a>
+          <a href="#/Projects" style={itemStyle}>
+            <FontAwesomeIcon icon={faProjectDiagram} />
+            <span style={{ marginLeft: '1px' }}></span>
+          </a>
+          <a href="#/Contact-Me" style={itemStyle}>
+            <FontAwesomeIcon icon={faEnvelope} />
+            <span style={{ marginLeft: '1px' }}></span>
+          </a>
         </div>
       )}
     </div>

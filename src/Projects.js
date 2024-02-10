@@ -3,8 +3,13 @@ import {DropdownMenu} from './App'
 
 
 export default function Projects({isDarkMode}){
-    return(<div>
-    <DropdownMenu/>
-        Projects Here
-    </div>);
+    return (
+        <body >
+            <div className='App' >
+            <DropdownMenu/>
+            <h1 >Projects</h1></div>
+
+        </body>
+        
+        )
 }

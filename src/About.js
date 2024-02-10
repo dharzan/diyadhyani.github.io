@@ -23,7 +23,7 @@ export function AboutMe({isDarkMode}){
 
 
         <DropdownMenu/>
-            <div><h1 style={{ color: isDarkMode ? 'white' : 'black' }}>Diya Dhyani</h1></div>
+            <div className='App'><h1 style={{ color: isDarkMode ? 'white' : 'black' }}>I love Dharsan so much</h1></div>
 
          
 
