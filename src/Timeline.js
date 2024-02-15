@@ -1,57 +1,9 @@
-import React, { useRef, useState, useMemo, useEffect } from 'react';
-import { Canvas, useFrame,useThree } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons'; // For the close button
-import { DropdownMenu } from './App';
-import { Star } from './App';
-import { Cube } from './App';
-import { Vector3 } from 'three'; // Import Vector3 directly from 'three'
-import { gsap } from 'gsap'; // Import GSAP
-
-import { SkullModel } from './About';
-// import { Planets } from './App';
+import React, { useMemo, useRef, useState } from 'react';
+import { Canvas, useFrame } from 'react-three-fiber';
+import { Cube, DropdownMenu, Star } from './App';
 
 
-function InteractiveMesh() {
-  const { camera } = useThree();
-  const originalPosition = useRef(null);
-
-  // Use useEffect to run once on mount and capture the camera's original position
-  useEffect(() => {
-    originalPosition.current = { ...camera.position };
-  }, [camera.position]); // camera.position is a dependency, but in practice, it should be stable
-
-  const onDoubleClick = () => {
-    // Example target position for the zoom effect
-    const targetPosition = { ...camera.position, z: camera.position.z + 500 };
-    gsap.to(camera.position, {
-      x: targetPosition.x,
-      y: targetPosition.y,
-      z: targetPosition.z,
-      duration: 2
-    });
-  };
-
-  const onPointerEnter = () => {
-    // Return to the original position
-    if (originalPosition.current) {
-      gsap.to(camera.position, {
-        x: originalPosition.current.x,
-        y: originalPosition.current.y,
-        z: originalPosition.current.z,
-        duration: 1
-      });
-    }
-  };
-
-  return (
-    <mesh onClick={onDoubleClick} onPointerEnter={onPointerEnter}>
-      {/* Assuming Cube is a valid component that renders correctly */}
-      <Cube />
-    </mesh>
-  );
-}
 
 export function Event({ position, id, setSelectedEvent, selectedEventId }) {
   const meshRef = useRef();
@@ -126,11 +78,8 @@ function TimelineVisualization({ setSelectedEvent, selectedEventId }) {
       <pointLight position={[10, 10, 10]} />
       <OrbitControls />
       <Cube/>
-      <InteractiveMesh/>
-      {/* <Planets/> */}
       
       {stars}
-      
 
       {events.map((event) => (
         <Event
@@ -167,11 +116,6 @@ function Timeline() {
     </div>
   );
 }
-
-
-// Event component remains the same
-
-
 
 // Update styles accordingly
 export const styles = {
